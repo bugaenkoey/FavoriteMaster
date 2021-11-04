@@ -16,7 +16,7 @@ namespace FavoriteMaster.Controllers
     {
         // GET: api/<UserController1>
         [HttpGet]
-      //  public string[] Get()
+      //public string[] Get()
           public IEnumerable<User> Get()
         {
             List<User> users = new List<User>
@@ -28,7 +28,7 @@ namespace FavoriteMaster.Controllers
         
             using (FavoriteMasterContext db = new FavoriteMasterContext())
             {
-                // users = db.Users.ToList();
+                 users = db.Users.ToList();
                // Console.WriteLine($"Список объектов:{users}");
 
             }
