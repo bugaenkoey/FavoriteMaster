@@ -40,20 +40,61 @@ namespace FavoriteMaster.Controllers
 
         // POST api/<UserController1>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] User user)
         {
+            using (FavoriteMasterContext db = new FavoriteMasterContext())
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
         }
 
         // PUT api/<UserController1>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
+
+        }
+
+
+        [HttpPut]
+        public void Put([FromBody] User user)
+        {
+            using (FavoriteMasterContext db = new FavoriteMasterContext())
+            {
+                // получаем первый объект
+                User userR = db.Users.Find(user.Id);
+                if (userR != null)
+                {
+                    userR.Name = user.Name;
+                    userR.surname = user.surname;
+                    userR.phone = user.phone;
+                    
+
+                    //обновляем объект
+                    db.Users.Update(userR);
+                    db.SaveChanges();
+                }
+            }
         }
 
         // DELETE api/<UserController1>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            using (FavoriteMasterContext db = new FavoriteMasterContext())
+            {
+                User user = db.Users.Find(id);
+                // получаем первый объект
+               // User user = db.Users.FirstOrDefault();
+                if (user != null)
+                {
+                    //удаляем объект
+                    db.Users.Remove(user);
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }
