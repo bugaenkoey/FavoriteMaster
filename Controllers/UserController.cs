@@ -9,39 +9,33 @@ using System.Threading.Tasks;
 
 namespace FavoriteMaster.Controllers
 {
-   // [Route("api/[controller]")]
+    // [Route("api/[controller]")]
     [ApiController]
     [Route("user")]
     public class UserController : ControllerBase
     {
         // GET: api/<UserController1>
         [HttpGet]
-      //public string[] Get()
-          public IEnumerable<User> Get()
+        //public string[] Get()
+        public IEnumerable<User> Get()
         {
-            List<User> users = new List<User>
-            {
-                { new User() { Id = 1, Name = "vasa", surname = "Vasiliev", phone = 1234567890 } },
-                { new User() { Id = 1, Name = "Kola", surname = "Nikolaev", phone = 1234567890 } },
-                { new User() { Id = 1, Name = "Petya", surname = "Petrov", phone = 1234567890 } }
-            };
-        
+
             using (FavoriteMasterContext db = new FavoriteMasterContext())
             {
-                 users = db.Users.ToList();
-               // Console.WriteLine($"Список объектов:{users}");
+                return db.Users.ToList();
 
             }
-          //  return new string[] { "value1", "value2" };
-            return users;
-          
         }
 
         // GET api/<UserController1>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public User Get(int id)
         {
-            return "value";
+            using (FavoriteMasterContext db = new FavoriteMasterContext())
+            {
+                return db.Users.Find(id);
+
+            }
         }
 
         // POST api/<UserController1>
