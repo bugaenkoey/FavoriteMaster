@@ -11,5 +11,11 @@ namespace FavoriteMaster.Models
         public string Name { get; set; }
         public string surname { get; set; }
         public int phone { get; set; }
+        public ICollection<Order> orders { get; set; }
+        public User()
+        {
+            orders = new List<Order>();
+        }
+        
     }
 }

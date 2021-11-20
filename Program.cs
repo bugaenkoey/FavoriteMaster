@@ -14,8 +14,7 @@ namespace FavoriteMaster
     {
         public static void Main(string[] args)
         {
-            new FavoriteMasterContext();
-           
+            new FavoriteMasterContext();           
 
             CreateHostBuilder(args).Build().Run();
            

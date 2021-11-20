@@ -14,7 +14,6 @@ namespace FavoriteMaster
 {
     public class Startup
     {
-      //  public static readonly string Id_DB = "Weather";
         public static readonly string Id_DB = "FavoriteMaster";
         public Startup(IConfiguration configuration)
         {
@@ -32,6 +31,13 @@ namespace FavoriteMaster
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            //+++++++++++++++++
+            services.AddCors(
+             options => options.AddPolicy("devCors", opts => opts
+             .AllowAnyOrigin()
+             .AllowAnyHeader()
+             .AllowAnyMethod()));
+            //-------------
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +47,11 @@ namespace FavoriteMaster
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
-              //  CreateDbIfNot();
 
+                //+++++++++++++++++++++++++++++++++
+
+                app.UseCors("devCors");
+                //-----------------------------------
             }
             else
             {
@@ -76,8 +84,6 @@ namespace FavoriteMaster
                 });
             });
 
-
-
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -87,39 +93,10 @@ namespace FavoriteMaster
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //Временно отключен Angular
+                    //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
         }
-/*
-        public void CreateDbIfNot()
-        {
-
-            //@"Data Source=.\SQLEXPRESS;Initial Catalog=usersdb;Integrated Security=True";
-          //  string StringConect = @"Data Source=LAPTOP-046QU23H\SQLEXPRESS;Integrated Security=True;";
-            string StringConect = @"Data Source=.\SQLEXPRESS;Integrated Security=True;";
-
-            SqlConnection Connect = new SqlConnection(StringConect);
-            Connect.Open();
-            //подготовить запрос insert
-            //в переменной типа string
-            //CREATE DATABASE IF NOT EXISTS {Id_DB};
-            // string Id_DB = "Weather";
-            string insertString = $"If(db_id(N'{Id_DB}') IS NULL) CREATE DATABASE[{Id_DB}]";
-
-
-            //создать объект command,
-            //инициализировав оба свойства
-            //"If(db_id(N'Weather') IS NULL) CREATE DATABASE[Weather]"
-            SqlCommand cmd = new SqlCommand(insertString, Connect);
-            //выполнить запрос, занесенный
-            //в объект command
-
-            cmd.ExecuteNonQuery();
-            Connect.Close();
-        }
-*/
     }
-
-
 }

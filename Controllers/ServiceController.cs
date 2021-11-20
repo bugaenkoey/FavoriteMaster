@@ -9,82 +9,74 @@ using System.Threading.Tasks;
 
 namespace FavoriteMaster.Controllers
 {
-    // [Route("api/[controller]")]
+    [Route("Service")]
     [ApiController]
-    [Route("user")]
-    public class UserController : ControllerBase
+    public class ServiceController : ControllerBase
     {
-        // GET: api/<UserController1>
+        // GET: api/<ServiceController>
         [HttpGet]
-        //public string[] Get()
-        public IEnumerable<User> Get()
+        public IEnumerable<Service> Get()
         {
 
             using FavoriteMasterContext db = new FavoriteMasterContext();
-            return db.Users.ToList();
+            return db.Services.ToList();
         }
 
-        // GET api/<UserController1>/5
+        // GET api/<ServiceController>/5
         [HttpGet("{id}")]
-        public User Get(int id)
+        public Service Get(int id)
         {
             using FavoriteMasterContext db = new FavoriteMasterContext();
-            return db.Users.Find(id);
+            return db.Services.Find(id);
         }
 
-        // POST api/<UserController1>
+        // POST api/<ServiceController>
         [HttpPost]
-        public void Post([FromBody] User user)
+        public void Post([FromBody] Service service)
         {
             using FavoriteMasterContext db = new FavoriteMasterContext();
-            db.Users.Add(user);
+            db.Services.Add(service);
             db.SaveChanges();
         }
 
-        // PUT api/<UserController1>/5
+        // PUT api/<ServiceController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
-
-
         }
 
-
-        [HttpPut]
-        public void Put([FromBody] User user)
-        {
-            using FavoriteMasterContext db = new FavoriteMasterContext();
-            // получаем первый объект
-            User userR = db.Users.Find(user.Id);
-            if (userR != null)
-            {
-                userR.Name = user.Name;
-                userR.surname = user.surname;
-                userR.phone = user.phone;
-
-
-                //обновляем объект
-                db.Users.Update(userR);
-                db.SaveChanges();
-            }
-        }
-
-        // DELETE api/<UserController1>/5
+        // DELETE api/<ServiceController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             using FavoriteMasterContext db = new FavoriteMasterContext();
-
-            User user = db.Users.Find(id);
+            Service service = db.Services.Find(id);
             // получаем первый объект
-            // User user = db.Users.FirstOrDefault();
-            if (user != null)
+            if (service != null)
             {
                 //удаляем объект
-                db.Users.Remove(user);
+                db.Services.Remove(service);
                 db.SaveChanges();
             }
+        }
 
+        [HttpPut]
+        public void Put([FromBody] Service service)
+        {
+            using FavoriteMasterContext db = new FavoriteMasterContext();
+            // получаем первый объект
+            Service serviceR = db.Services.Find(service.Id);
+            if (serviceR != null)
+            {
+                serviceR.Name = service.Name;
+                serviceR.Description = service.Description;
+                serviceR.Price = service.Price;
+                serviceR.Duration = service.Duration;
+
+                //обновляем объект
+                db.Services.Update(serviceR);
+                db.SaveChanges();
+            }
         }
     }
 }

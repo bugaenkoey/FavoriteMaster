@@ -1,0 +1,31 @@
+ 
+https://localhost:44354/service
+{
+        "id": 2,
+        "name": "Гель лак",
+        "description": "Гель лак",
+        "price": 200.00,
+        "duration": 2.00
+    }
+
+https://localhost:44354/user
+{
+        "id": 3,
+        "name": "Djanet",
+        "surname": "Djakson",
+        "phone": 888888,
+        "orders": []
+    }
+
+https://localhost:44354/order
+    {
+        "id": 9,
+        "service": null,
+        "serviceId": 2,
+        "userId": 3,
+        "user": null,
+        "done": false,
+        "dateTime": "2021-11-06T00:00:00",
+        "note": "Done manikure",
+        "comment": "Menikure the Best"
+    }
