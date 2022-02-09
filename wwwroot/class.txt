@@ -1,0 +1,59 @@
+Снятие - 0.5 часа
+Маникюр - 1 час
+Гель лак - 2 часа
+Коррекция - 3 часа
+Наращивание - 3.5 часа
+Выкладной френч - 4 часа
+
+  public class Service
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public decimal Duration { get; set; }
+      
+    }
+{
+        "name": "Выкладной френч",
+        "description": "Выкладной френч",
+        "price": 400.00,
+        "duration": 4
+    }
+
+  public class User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string surname { get; set; }
+        public int phone { get; set; }
+        public ICollection<Order> orders { get; set; }
+        public User()
+        {
+            orders = new List<Order>();
+        }
+        
+    }
+
+ public class Order
+    {
+        public int Id { get; set; }
+        public Service Service { get; set; }
+        public int? ServiceId { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
+        public bool Done { get; set; } = false;
+        public DateTime? DateTime { get; set; }
+        public string? Note { get; set; }
+        public string? Comment { get; set; }
+    }
+export interface IOrder{
+    id:number;
+    service:string;
+    serviseId:number;
+    user:string;
+    userId:number;
+    done:boolean;
+    note:string;
+    comment:string;
+}

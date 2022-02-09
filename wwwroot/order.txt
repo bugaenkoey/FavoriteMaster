@@ -1,0 +1,14 @@
+  linkNailServise ='https://jsonplaceholder.typicode.com/users';
+
+    getNailServises(): Observable<INailServise[]> {
+        return this.client.get<INailServise[]>(this.linkNailServise);
+      }
+
+
+--------------
+Снятие - 0.5 часа
+Маникюр - 1 час
+Гель лак - 2 часа
+Коррекция - 3 часа
+Наращивание - 3.5 часа
+Выкладной френч - 4 часа

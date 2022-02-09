@@ -32,14 +32,48 @@ namespace FavoriteMaster.Controllers
             return db.Users.Find(id);
         }
 
+        //[HttpGet("{phone}")]
+        //public int Get(int phone)
+        //{
+        //    using FavoriteMasterContext db = new FavoriteMasterContext();
+        //    int id = db.Users.Find(phone).Id;
+        //    return id;
+        //}
+
+        /*using (var context = new BloggingContext())
+{
+    // Query for all blogs with names starting with B
+    var blogs = from b in context.Blogs
+                   where b.Name.StartsWith("B")
+                   select b;
+
+    // Query for the Blog named ADO.NET Blog
+    var blog = context.Blogs
+                    .Where(b => b.Name == "ADO.NET Blog")
+                    .FirstOrDefault();
+}
+         */
+
         // POST api/<UserController1>
         [HttpPost]
-        public void Post([FromBody] User user)
+        public User Post([FromBody] User user)
         {
             using FavoriteMasterContext db = new FavoriteMasterContext();
             db.Users.Add(user);
             db.SaveChanges();
+
+            return user;
         }
+        //public int Post([FromBody] User user)
+        //{
+        //    using FavoriteMasterContext db = new FavoriteMasterContext();
+        //    db.Users.Add(user);
+        //    db.SaveChanges();
+
+        //    var newUser = user.Id;
+        //    return newUser;
+        //}
+
 
         // PUT api/<UserController1>/5
         [HttpPut("{id}")]

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace FavoriteMaster.Controllers
 {
-    [Route("Order")]
     [ApiController]
+    [Route("Order")]
     public class OrderController : ControllerBase
     {
         // GET: api/<OrderController>
